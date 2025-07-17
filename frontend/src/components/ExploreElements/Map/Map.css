@@ -1,0 +1,69 @@
+.card {
+  width: 100px;
+  height: 150px;
+  background: #313131;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+  border-radius: 12px;
+}
+
+.textBox {
+  opacity: 0;
+  z-index: 2;
+  padding: 0.4rem;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 10px;
+  line-height: 1.1;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.5); /* Optional dark overlay for better contrast */
+  backdrop-filter: blur(2px);
+}
+
+.textBox .head {
+  font-size: 11px;
+  font-weight: 600;
+  width: 90%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.textBox .price {
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.card:hover .img {
+  filter: blur(5px);
+  transform: scale(1.05);
+}
+
+.card:hover .textBox {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: scale(1.04) rotate(-1deg);
+}
