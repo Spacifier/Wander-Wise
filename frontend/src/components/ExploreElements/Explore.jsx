@@ -377,7 +377,7 @@ function Explore() {
                     coordinates = {coordinates}
                     places = {filteredPlaces.length ? filteredPlaces : mockPlaces}
                     setChildClicked = {setChildClicked}
-                    weatherData={weatherData}
+                    weatherData={mockWeatherData}
                     />
                 </div>
             </div>
