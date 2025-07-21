@@ -19,18 +19,18 @@ const userSchema = new Schema(
             lowercase: true,
             trim:true
         },
-        fullname:{
-            type:String,
-            required: true,
-            trim: true,
-            index: true
-        },
         avatar:{
             type:String,
         },
         password:{
             type:String,
             required: [true,"Password is required"]
+        },
+        status: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
+            required: true
         },
         refreshToken: {
             type: String

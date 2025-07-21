@@ -70,3 +70,17 @@ export const formatKey = (key) => {
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase());
 };
+
+// src/utils/api.js
+export async function getCurrentUser() {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/current-user`, {
+    method: "GET",
+    credentials: "include", // in case you're using cookies
+  });
+
+  if (!res.ok) throw new Error("Unauthorized");
+
+  const { data } = await res.json();
+  return data;
+}
+

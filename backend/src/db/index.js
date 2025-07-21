@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const DB_NAME = "wander_wise";
 
 const connectDB = async() => {

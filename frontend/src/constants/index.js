@@ -67,7 +67,10 @@ export const RIGHT_CONFETTI = {
 };
 
 
-export const user = {name: 'Swapnil'}
+export const user = {
+    username: 'Swapnil',
+    email:'sgarg@gmail.com',
+}
 export const dashboardStats = {
     totalUsers : 1245,
     usersJoined : { currentMonth : 218, lastMonth : 176},
@@ -117,7 +120,7 @@ export const users = [
       id: 1,
       name: "John Doe",
       email: "john.doe@example.com",
-      imageUrl: "/assets/images/david.webp",
+      imageUrl: "/images/david.webp",
       dateJoined: formatDate("2025-01-01"),
       itineraryCreated: 10,
       status: "user",
@@ -126,7 +129,7 @@ export const users = [
       id: 2,
       name: "Jane Smith",
       email: "jane.smith@example.com",
-      imageUrl: "/assets/images/david.webp",
+      imageUrl: "/images/david.webp",
       dateJoined: formatDate("2025-01-02"),
       itineraryCreated: 4,
       status: "user",
@@ -135,7 +138,7 @@ export const users = [
       id: 3,
       name: "John Smith",
       email: "john.smith@example.com",
-      imageUrl: "/assets/images/david.webp",
+      imageUrl: "/images/david.webp",
       dateJoined: formatDate("2025-01-03"),
       itineraryCreated: 8,
       status: "admin",

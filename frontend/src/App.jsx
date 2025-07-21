@@ -5,19 +5,22 @@ import Explore from './components/ExploreElements/Explore.jsx'
 import AdminLayout from './AdminLayout.jsx'
 import Dashboard from './admin/dashboard.jsx'
 import AllUsers from './admin/AllUsers.jsx'
+import SignIn from './root/SignIn.jsx'
+import ProtectedRoute from './root/ProtecteRoute.jsx'
 
 
 function App() {
     return (
         <main className='relative min-h-screen'>
         <Routes>
+            <Route path='/sign-in' element={<SignIn />} />
             <Route path='/' element={<Layout />}>
                 <Route path='' element={<Home />} />
-                <Route path='explore' element={<Explore />} />
+                <Route path='explore' element={<ProtectedRoute> <Explore /> </ProtectedRoute>} />
             </Route>
-            <Route path='/admin' element={<AdminLayout />}>
-                <Route path='dashboard' element={<Dashboard />} />
-                <Route path='all-users' element={<AllUsers />} />
+            <Route path='/admin' element={<ProtectedRoute> <AdminLayout /> </ProtectedRoute>}>
+                <Route path='dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
+                <Route path='all-users' element={<ProtectedRoute> <AllUsers /> </ProtectedRoute>} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Routes>
