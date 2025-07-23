@@ -1,13 +1,11 @@
 import {Link,NavLink} from 'react-router-dom';
 import { sidebarItems } from '../src/constants';
-import { cn } from '../src/lib/utils';
+import { cn, getRandomAvatar } from '../src/lib/utils';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../src/root/AuthProvider';
 
 function NavItems({handleClick}){
-    const user = {
-        name: 'Swapnil',
-        email: 'sgarg_be22@thapar.edu',
-        imageUrl: '/img/logo.png'
-    }
+    const { user, logout } = useAuth();
 
     return (
         <section className="nav-items">
@@ -31,15 +29,13 @@ function NavItems({handleClick}){
                     ))}
                 </nav>
                 <footer className='nav-footer'>
-                    <img src={user?.imageUrl || '/img/logo.png'} alt={user?.name || 'WanderWise User'} />
+                    <img src={user?.avatar || getRandomAvatar()} alt={user?.username || 'WanderWise User'} />
                     <article>
-                        <h2> {user?.name} </h2>
+                        <h2> {user?.username} </h2>
                         <p> {user?.email} </p>
                     </article>
                     <button 
-                        onClick={() => {
-                            console.log("logout")
-                        }}
+                        onClick={logout}
                         className='cursor-pointer'
                     >
                         <img src="/icons/logout.svg" alt="logout" className='size-6'/>

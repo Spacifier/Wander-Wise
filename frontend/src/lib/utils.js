@@ -71,16 +71,25 @@ export const formatKey = (key) => {
     .replace(/^./, (str) => str.toUpperCase());
 };
 
-// src/utils/api.js
-export async function getCurrentUser() {
-  const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/current-user`, {
-    method: "GET",
-    credentials: "include", // in case you're using cookies
-  });
+export const getRandomAvatar = () => {
+  const total = 9; // total number of default images
+  const randomIndex = Math.floor(Math.random() * total) + 1;
+  return `/avatars/default${randomIndex}.jpg`;
+};
 
-  if (!res.ok) throw new Error("Unauthorized");
+export const fetchAllUsers = async() => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/all-users`,{
+            method: "GET",
+            credentials: "include"
+        });
 
-  const { data } = await res.json();
-  return data;
-}
+        const {data} = await res.json();
+        return data;
+
+    } catch (error) {
+        console.error("Failed to fetch users:",error)
+        return [];
+    }
+};
 

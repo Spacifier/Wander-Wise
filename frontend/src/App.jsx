@@ -1,12 +1,15 @@
-import {Routes,Route} from 'react-router-dom'
-import Layout from './Layout'
-import Home from './components/HomeElements/Home.jsx'
-import Explore from './components/ExploreElements/Explore.jsx'
-import AdminLayout from './AdminLayout.jsx'
-import Dashboard from './admin/dashboard.jsx'
-import AllUsers from './admin/AllUsers.jsx'
-import SignIn from './root/SignIn.jsx'
-import ProtectedRoute from './root/ProtecteRoute.jsx'
+import {Routes,Route} from 'react-router-dom';
+import Layout from './Layout';
+import Home from './components/HomeElements/Home.jsx';
+import Explore from './components/ExploreElements/Explore.jsx';
+import AdminLayout from './AdminLayout.jsx';
+import Dashboard from "./admin/Dashboard.jsx";
+import AllUsers from './admin/AllUsers.jsx';
+import SignIn from './root/SignIn.jsx';
+import ProtectedRoute from './root/ProtecteRoute.jsx';
+import AdminRoute from './root/AdminRoute.jsx';
+import CreateTrips from './admin/CreateTrip.jsx';
+import Trips from './admin/trips.jsx';
 
 
 function App() {
@@ -18,9 +21,11 @@ function App() {
                 <Route path='' element={<Home />} />
                 <Route path='explore' element={<ProtectedRoute> <Explore /> </ProtectedRoute>} />
             </Route>
-            <Route path='/admin' element={<ProtectedRoute> <AdminLayout /> </ProtectedRoute>}>
-                <Route path='dashboard' element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
-                <Route path='all-users' element={<ProtectedRoute> <AllUsers /> </ProtectedRoute>} />
+            <Route path='/admin' element={<AdminRoute> <AdminLayout /> </AdminRoute>}>
+                <Route path='dashboard' element={<AdminRoute> <Dashboard /> </AdminRoute>} />
+                <Route path='all-users' element={<AdminRoute> <AllUsers /> </AdminRoute>} />
+                <Route path='trips' element={<AdminRoute> <Trips/> </AdminRoute>} />
+                <Route path='trips/create' element={<AdminRoute> <CreateTrips/> </AdminRoute>} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Routes>

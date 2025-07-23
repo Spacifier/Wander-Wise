@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getCurrentUser } from "../../lib/utils";
-import { user as defaultUser } from "../../constants";
+import { useAuth } from "../../root/AuthProvider";
 
 function Home() {
-    const [user, setUser] = useState(defaultUser);
-
-    useEffect(() => {
-        getCurrentUser().then(setUser).catch(console.error);
-    },[])
+    const { user, logout } = useAuth();
 
     return(
-        <div className="h-screen w-screen overflow-hidden flex flex-col">
-            <h2>Welcome, {user?.username || "Guest"}</h2>
+        <div className="h-screen w-screen flex flex-col home">
+            <h2 className="absolute-center text-gray-50 font-semibold text-5xl font-[azonix]">
+                Welcome, {user?.username || "Guest"}
+            </h2>
         </div>
     );
 }

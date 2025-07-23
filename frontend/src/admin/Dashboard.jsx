@@ -1,14 +1,17 @@
+import { useEffect, useState } from "react";
 import { Header, StatsCard, TripCard } from "../../components";
-import { dashboardStats, user, allTrips } from "../constants";
+import { dashboardStats, allTrips } from "../constants";
+import { useAuth } from "../root/AuthProvider";
 
 const { totalUsers,totalTrips,tripsCreated,usersJoined,userRole} = dashboardStats;
 
 function Dashboard(){  
+    const { user, logout } = useAuth();
 
     return (
         <main className="dashboard wrapper">
             <Header 
-                title = {`Welcome ${user?.name ?? 'Guest'} 👋`}
+                title = {`Welcome ${user?.username ?? 'Guest'} 👋`}
                 description = "Track activiaty, trends and popular destination in real time"
             />
 

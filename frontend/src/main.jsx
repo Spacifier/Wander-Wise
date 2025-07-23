@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom'
 import App from './App.jsx'
 
 import {registerLicense} from "@syncfusion/ej2-base";
+import { AuthProvider } from './root/AuthProvider.jsx'
 registerLicense(import.meta.env.VITE_SYNCFUSION_LICENSE_KEY)
 
 //Loading google maps for the explore page
@@ -21,7 +22,9 @@ loadGoogleMapsScript();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+    <AuthProvider>
+        <App />
+    </AuthProvider>
     </BrowserRouter>
   </StrictMode>,
 )

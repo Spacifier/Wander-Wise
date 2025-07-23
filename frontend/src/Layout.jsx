@@ -5,11 +5,11 @@ import Footer from "./components/common/Footer.jsx";
 function Layout(){
 
     return (
-        <>
+        <div className="overflow-hidden">
         <Header />
         <Outlet />
         <Footer />
-        </>
+        </div>
     );
 }
 

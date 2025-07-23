@@ -56,16 +56,16 @@ function Map({setCoordinates, setBounds, coordinates, places, setChildClicked, w
                 ))}
 
             {/* Weather markers */}
-            {weatherData.map((data, i) => (
-                <div key={i} lat={data.lat} lng={data.lon}>
+            {weatherData?.current?.weather && (
+                <div lat={weatherData.lat} lng={weatherData.lon}>
                     <img
-                    src={`http://openweathermap.org/img/w/${data.current.weather[0].icon}.png`}
-                    alt={data.current.weather[0].description}
-                    title={`${data.current.weather[0].description}, ${data.current.temp}°C`}
+                    src={`http://openweathermap.org/img/w/${weatherData.current.weather[0].icon}.png`}
+                    alt={weatherData.current.weather[0].description}
+                    title={`${weatherData.current.weather[0].description}, ${weatherData.current.temp}°C`}
                     className="h-[60px] w-[60px]"
                     />
                 </div>
-            ))}
+            )}
 
            </GoogleMapReact>
        </div>

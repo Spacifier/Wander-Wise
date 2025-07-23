@@ -1,20 +1,13 @@
-// src/components/ProtectedRoute.jsx
-import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { getCurrentUser } from '../lib/utils';
+// src/root/ProtectedRoute.jsx
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 
-export default function ProtectedRoute({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+function ProtectedRoute({ children }) {
+  const { user, authChecked } = useAuth();
 
-  useEffect(() => {
-    getCurrentUser()
-      .then(() => setIsAuthenticated(true))
-      .catch(() => setIsAuthenticated(false))
-      .finally(() => setIsLoading(false));
-  }, []);
+  if (!authChecked) return null; // Or loading spinner
 
-  if (isLoading) return <p>Loading...</p>;
-
-  return isAuthenticated ? children : <Navigate to="/sign-in" />;
+  return user ? children : <Navigate to="/sign-in" />;
 }
+
+export default ProtectedRoute;

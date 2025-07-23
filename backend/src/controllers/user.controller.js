@@ -9,6 +9,11 @@ const options = {
     httpOnly: true,
     secure: false
 }
+const getRandomAvatar = () => {
+  const total = 9;
+  const randomIndex = Math.floor(Math.random() * total) + 1;
+  return `/avatars/default${randomIndex}.jpg`;
+};
 
 const generateAccessAndRefreshTokens = async(userId) => {
     try {
@@ -40,10 +45,13 @@ const registerUser = asyncHandler(async(req,res) => {
         throw new ApiError(409,"Username with same username or email already exists");
     }
 
+    const avatar = getRandomAvatar();
+
     const user = await User.create({
         username:username.toLowerCase(),
         email,
-        password
+        password,
+        avatar
     })
 
     const createdUser = await User.findById(user._id).select("-password -refreshToken");
@@ -215,6 +223,19 @@ const updateAvatarImage = asyncHandler(async(req,res) => {
         .json(new ApiResponse(200, user, "Avatar updated successfully"))
 }) 
 
+const getAllUsers = asyncHandler(async(req,res) => {
+    const users = await User.find().select("-password -refreshToken");
+    if(!users.length){
+        throw new ApiError(404,"No users found");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, users, "Users fetched Successfully")
+        )
+})
+
 export {
     registerUser,
     loginUser,
@@ -222,5 +243,6 @@ export {
     refreshAccessToken,
     changeCurrentPassword,
     getCurrentUser,
-    updateAvatarImage
+    updateAvatarImage,
+    getAllUsers
 }

@@ -1,7 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "../src/lib/utils";
+import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
 
-function Header({title, description}){
+function Header({title, description, ctaText, ctaUrl}){
     const location = useLocation();
 
     return (
@@ -18,6 +19,15 @@ function Header({title, description}){
                     {description} 
                 </p>
             </article>
+
+            {ctaText && ctaUrl && (
+                <Link to={ctaUrl}>
+                   <ButtonComponent type="button" className="button-class !h-11 !w-full md:w-[240px]">
+                        <img src="/icons/plus.svg" alt="plus" className="size-5" />
+                        <span className="p-16-semibold text-white">{ctaText}</span>
+                    </ButtonComponent>
+                </Link>
+            )}
         </header>
     );
 }

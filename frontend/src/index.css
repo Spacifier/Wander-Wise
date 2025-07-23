@@ -39,6 +39,7 @@
   --color-red-100: #ff543d;
 
   --background-image-auth: url("/images/auth-img.png");
+  --background-image-home: url("/img/home-bg.jpeg");
   --background-image-hero: url("/images/hero-img.png");
   --background-image-card-1: url("/images/card-img-1.png");
   --background-image-card-2: url("/images/card-img-2.png");
@@ -89,6 +90,22 @@
         font-family: "zentry";
         src: url("/fonts/zentry-regular.woff2") format("woff2");
     }
+    @font-face {
+        font-family: "azonix";
+        src: url("/fonts/Azonix.otf") format("opentype");
+    }
+    @font-face {
+        font-family: "orkney";
+        src: url("/fonts/Orkney Regular.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: "nordic";
+        src: url("/fonts/Nordic Alternative Regular.ttf") format("truetype");
+    }
+    @font-face {
+        font-family: "ailerons";
+        src: url("/fonts/Ailerons-TrialVersion.otf") format("opentype");
+    }
 }
 
 @layer components {
@@ -134,6 +151,9 @@
     }
     .auth {
         @apply w-full h-screen flex bg-auth bg-cover bg-no-repeat;
+    }
+    .home {
+        @apply w-full h-screen flex bg-home bg-cover bg-no-repeat;
     }
 
     .payment-success {

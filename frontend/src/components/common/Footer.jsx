@@ -11,8 +11,8 @@ const links = [
 
 const Footer = () => {
   return (
-    <footer className="w-screen bg-[#716d69] py-5 text-black">
-      <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
+    <footer className="w-screen bg-[#716d69] py-5 text-black overflow-hidden overflow-x-hidden">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row overflow-hidden overflow-x-hidden">
         <p className="text-center text-sm font-light md:text-left">
         &copy; Spacifier 2025. All rights reserved
         </p>
