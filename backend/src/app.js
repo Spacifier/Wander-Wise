@@ -18,9 +18,10 @@ app.use(cookieParser())
 
 //router import 
 import userRouter from './routes/user.route.js';
+import tripRouter from './routes/trip.route.js';
 
 //route declaration
 app.use("/api/v1/users",userRouter);
-
+app.use("/api/v1/trips",tripRouter);
 
 export {app}

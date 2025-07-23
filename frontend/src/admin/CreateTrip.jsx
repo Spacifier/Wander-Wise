@@ -6,11 +6,15 @@ import { comboBoxItems, selectItems } from "../constants";
 import { cn, formatKey } from "../lib/utils";
 import { world_map } from "../constants/world_map";
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
+import { useAuth } from "../root/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 function CreateTrips(){
     const [countries,setCountries] = useState([]);
     const [error,setError] = useState(null);
     const [loading,setLoading] = useState(false);
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -70,14 +74,46 @@ function CreateTrips(){
             return
         }
 
-        // try {
-        //     console.log('user',user)
-        //     console.log('formData', formData)
-        // } catch (error) {
-        //     console.error("Error generating trips",error)
-        // }finally{
-        //     setLoading(false)
-        // }
+        //cheking if user logged in
+        if (!user?._id) {
+            console.error("User not authenticated");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/trips/create`,{
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    country,
+                    numberOfDays: duration,
+                    travelStyle,
+                    interests: interest,
+                    budget,
+                    groupType,
+                    userId: user?._id
+                })
+            });
+
+            const result = await res.json();
+
+            if(res.ok && result?.data?.tripId){
+                navigate(`/trips/${result.data.tripId}`);
+            }else{
+                console.error("Trip generation failed");
+                setError("Trip generation failed");
+            }
+            
+        } catch (error) {
+            console.error("Error generating trips",error)
+            setError("Something went wrong. Please try again.");
+        }finally{
+            setLoading(false)
+        }
     }
     const handleChange =(key,value) => {
         setFormData({ ... formData, [key]: value})
@@ -87,7 +123,7 @@ function CreateTrips(){
        <main className="flex flex-col gap-10 pb-20 wrapper">
             <Header title="Add a New Trip" description="View and edit AI Genereated Travel Plans" />
             <section className="mt-2.5 wrapper-md">
-                <form className="trip-form" onSubmit={handleSubmit()}>
+                <form className="trip-form" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="country">
                             Country

@@ -2,7 +2,7 @@ import mongoose,{Schema} from "mongoose";
 
 const tripSchema = new Schema(
     {
-        tripDeatail: {
+        tripDetail: {
             type: String,
             required: true
         },
@@ -15,7 +15,7 @@ const tripSchema = new Schema(
             type: String,
             trim: true
         },
-        createdBy: {
+        owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
