@@ -1,13 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
 import {GoogleGenerativeAI} from "@google/generative-ai";
 import mongoose,{isValidObjectId} from "mongoose";
 import { Trip } from "../models/trip.model.js";
-import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { parseMarkdownToJson } from "../../../frontend/src/lib/utils.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -66,7 +65,7 @@ const createTrip = asyncHandler(async(req,res) => {
             ]
         }`;
 
-        const model = genAI.getGenerativeModel({model: "gemini-2.0-flash"});
+        const model = genAI.getGenerativeModel({model: "gemini-1.5-flash"});
         const result = await model.generateContent(prompt);
         const rawText = result.response.text();
         const parsedTrip = parseMarkdownToJson(rawText);
@@ -104,6 +103,49 @@ const createTrip = asyncHandler(async(req,res) => {
     }
 })
 
+const getAllTrips = asyncHandler( async(req,res) => {
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const skip = (page-1) * limit;
+
+    const total = await Trip.countDocuments();
+    const allTrips = await Trip.find().sort({createdAt: -1}).skip(skip).limit(limit).select("-__v");
+
+    if(total === 0){
+        return res
+        .status(200)
+        .json(
+            new ApiResponse(200, {allTrips: [], total:0}, "No Trips to be fetched")
+        )
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, {allTrips, total}, "Trips fetched successfully")
+        )
+})
+
+const getTripById = asyncHandler( async(req,res) => {
+    const {tripId} = req.params;
+    if(!isValidObjectId(tripId)){
+        throw new ApiError(400, "Invalid trip ID");
+    }
+
+    const trip = await Trip.findById(tripId).populate("owner", "username email avatar");
+    if(!trip){
+        throw new ApiError(404, "Trip not found");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, trip, "Trip details fetched successfully")
+        )
+})
+
 export {
-    createTrip
+    createTrip,
+    getAllTrips,
+    getTripById
 }

@@ -53,7 +53,7 @@ function SignIn() {
     return (
         <main className="h-screen w-screen flex bg-[#050f10] gap-2 overflow-hidden">
             {/* Left Side Panel */}
-            <div className="w-full md:w-3/7 bg-[#262626] text-white px-8 md:px-16 py-10 flex flex-col justify-between rounded-2xl mt-4 ml-4 mb-4">
+            <div className="w-full md:w-3/7 bg-[#050f10] text-white px-8 md:px-16 py-10 flex flex-col justify-between rounded-2xl mt-4 ml-4 mb-4">
                 <div>
                     <h2 className="text-3xl text-center font-bold mb-2 transition-transform duration-300 hover:scale-105">
                         {isLogin ? "Welcome back!" : "Sign up!"}
@@ -128,7 +128,7 @@ function SignIn() {
                             {isLogin && (
                             <button
                                 className="w-full bg-zinc-700 hover:bg-zinc-800 p-3 rounded text-center text-white font-medium"
-                                onClick={() => alert("Popular destinations loading...")}
+                                onClick={() => navigate("/")}
                             >
                                 Browse Popular Destinations
                             </button>

@@ -10,6 +10,7 @@ import ProtectedRoute from './root/ProtecteRoute.jsx';
 import AdminRoute from './root/AdminRoute.jsx';
 import CreateTrips from './admin/CreateTrip.jsx';
 import Trips from './admin/trips.jsx';
+import TripDetails from './admin/TripDetails.jsx';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 <Route path='all-users' element={<AdminRoute> <AllUsers /> </AdminRoute>} />
                 <Route path='trips' element={<AdminRoute> <Trips/> </AdminRoute>} />
                 <Route path='trips/create' element={<AdminRoute> <CreateTrips/> </AdminRoute>} />
+                <Route path='trips/:tripId' element={<AdminRoute> <TripDetails/> </AdminRoute>} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Routes>

@@ -3,7 +3,7 @@ import { Header } from "../../components";
 import {ComboBoxComponent} from "@syncfusion/ej2-react-dropdowns"
 import {LayerDirective, LayersDirective, MapsComponent} from '@syncfusion/ej2-react-maps';
 import { comboBoxItems, selectItems } from "../constants";
-import { cn, formatKey } from "../lib/utils";
+import { cn, fetchCountries, formatKey } from "../lib/utils";
 import { world_map } from "../constants/world_map";
 import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 import { useAuth } from "../root/AuthProvider";
@@ -17,26 +17,13 @@ function CreateTrips(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchCountries = async () => {
-            try {
-                const response = await fetch("https://restcountries.com/v3.1/all?fields=name,latlng,flags,maps");
-                const data = await response.json();
-
-                const formattedCountries = data.map((country) => ({
-                    name: `${country.flags?.emoji || ""} ${country.name.common}`,
-                    coordinates: country.latlng,
-                    value: country.name.common,
-                    openStreetMap: country.maps?.openStreetMap,
-                }));
-                setCountries(formattedCountries) 
-            } catch (error) {
-            console.error("Error fetching countries:", error);
-            }
+        const loadCountries = async () => {
+            const result = await fetchCountries();
+            setCountries(result);
         };
 
-        fetchCountries();
+        loadCountries();
     }, []);
-
     const countryData = countries.map((country) => ({
         text: country.name,
         value: country.value
@@ -102,7 +89,7 @@ function CreateTrips(){
             const result = await res.json();
 
             if(res.ok && result?.data?.tripId){
-                navigate(`/trips/${result.data.tripId}`);
+                navigate(`/admin/trips/${result.data.tripId}`);
             }else{
                 console.error("Trip generation failed");
                 setError("Trip generation failed");

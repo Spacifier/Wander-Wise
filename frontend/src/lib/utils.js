@@ -93,3 +93,62 @@ export const fetchAllUsers = async() => {
     }
 };
 
+export const fetchTripById = async (tripId) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/trips/${tripId}`, {
+            method: "GET",
+            credentials: "include",
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+            return { trip: null, err: result.message || "Failed to fetch trip" };
+        }
+
+        return { trip: result.data, err: null };
+    } catch (error) {
+        return { trip: null, err: error.message || "Unexpected error" };
+    }
+};
+
+export const fetchCountries = async () => {
+    try {
+        const response = await fetch("https://restcountries.com/v3.1/all?fields=name,latlng,flags,maps");
+        const data = await response.json();
+
+        const formattedCountries = data.map((country) => ({
+            name: `${country.flags?.emoji || ""} ${country.name.common}`,
+            coordinates: country.latlng,
+            value: country.name.common,
+            openStreetMap: country.maps?.openStreetMap,
+        }));
+
+        return formattedCountries;
+    } catch (error) {
+        console.error("Error fetching countries:", error);
+        return [];
+    }
+};
+
+
+export const fetchAllTrips = async (limit = 10, page = 1) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/trips/all?limit=${limit}&page=${page}`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const { data } = await res.json();
+        return {
+            trips: data?.allTrips || [],
+            total: data?.total || 0,
+        };
+    } catch (error) {
+        console.error("Failed to fetch trips:", error);
+        return {
+            trips: [],
+            total: 0,
+        };
+    }
+};
