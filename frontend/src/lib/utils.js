@@ -14,19 +14,19 @@ export const formatDate = (dateString) => {
 
 // Parse code blocks in markdown like ```json {...}
 export function parseMarkdownToJson(markdownText) {
-  const regex = /```json\n([\s\S]+?)\n```/;
-  const match = markdownText.match(regex);
+    const regex = /```json\n([\s\S]+?)\n```/;
+    const match = markdownText.match(regex);
 
-  if (match && match[1]) {
-    try {
-      return JSON.parse(match[1]);
-    } catch (error) {
-      console.error("Error parsing JSON:", error);
-      return null;
+    if (match && match[1]) {
+        try {
+        return JSON.parse(match[1]);
+        } catch (error) {
+        console.error("Error parsing JSON:", error);
+        return null;
+        }
     }
-  }
-  console.error("No valid JSON found in markdown text.");
-  return null;
+    console.error("No valid JSON found in markdown text.");
+    return null;
 }
 
 // If your Trip object is not typed, this is plain JSON.parse
@@ -77,21 +77,28 @@ export const getRandomAvatar = () => {
   return `/avatars/default${randomIndex}.jpg`;
 };
 
-export const fetchAllUsers = async() => {
+export const fetchAllUsers = async (limit = 10, page = 1) => {
     try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/all-users`,{
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/all-users?limit=${limit}&page=${page}`, {
             method: "GET",
             credentials: "include"
         });
 
-        const {data} = await res.json();
-        return data;
+        const { data } = await res.json();
 
+        return {
+            users: data?.users || [],
+            total: data?.total || 0,
+        };
     } catch (error) {
-        console.error("Failed to fetch users:",error)
-        return [];
+        console.error("Failed to fetch users:", error);
+        return {
+            users: [],
+            total: 0,
+        };
     }
 };
+
 
 export const fetchTripById = async (tripId) => {
     try {
@@ -150,5 +157,69 @@ export const fetchAllTrips = async (limit = 10, page = 1) => {
             trips: [],
             total: 0,
         };
+    }
+};
+
+// Fetch dashboard statistics
+export const fetchUsersAndTripsStats = async () => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/dashboard/stats`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const { data } = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch dashboard stats:", error);
+        return null;
+    }
+};
+
+// Fetch user growth per day
+export const fetchUserGrowthPerDay = async () => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/dashboard/user-growth`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const { data } = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch user growth data:", error);
+        return [];
+    }
+};
+
+// Fetch trip growth per day
+export const fetchTripGrowthPerDay = async () => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/dashboard/trip-growth`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const { data } = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch trip growth data:", error);
+        return [];
+    }
+};
+
+// Fetch trip breakdown by travel style
+export const fetchTripsByTravelStyle = async () => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/dashboard/travel-style`, {
+            method: "GET",
+            credentials: "include"
+        });
+
+        const { data } = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch trips by travel style:", error);
+        return [];
     }
 };

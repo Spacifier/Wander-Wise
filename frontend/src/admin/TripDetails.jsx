@@ -191,8 +191,8 @@ function TripDetails(){
                         </div>
                     </section>
                 ))}
-
-                <section className="flex flex-col gap-6">
+            </section>
+            <section className="flex flex-col gap-6">
                     <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
                     <div className="trip-grid">
                         {allTrips.map(({id, name, imageUrls, itinerary, interests, travelStyle, estimatedPrice}) => (
@@ -208,7 +208,6 @@ function TripDetails(){
                         ))}
                     </div>
                 </section>
-            </section>
         </main>
     );
 }

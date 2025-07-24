@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
 function AllUsers(){
     const [users,setUsers] = useState([]);
     useEffect(() => {
-        fetchAllUsers().then(setUsers);
+        const loadUsers = async () => {
+            const {users, total} = await fetchAllUsers();
+            setUsers(users);
+        };
+        loadUsers();
     },[]);
 
     return (

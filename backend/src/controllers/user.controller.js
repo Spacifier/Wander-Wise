@@ -224,7 +224,13 @@ const updateAvatarImage = asyncHandler(async(req,res) => {
 }) 
 
 const getAllUsers = asyncHandler(async(req,res) => {
-    const users = await User.find().select("-password -refreshToken");
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const skip = (page-1) * limit;
+
+    const total = await User.countDocuments();
+    const users = await User.find().sort({createdAt: -1}).skip(skip).limit(limit).select("-password -refreshToken");
+
     if(!users.length){
         throw new ApiError(404,"No users found");
     }
@@ -232,7 +238,7 @@ const getAllUsers = asyncHandler(async(req,res) => {
     return res
         .status(200)
         .json(
-            new ApiResponse(200, users, "Users fetched Successfully")
+            new ApiResponse(200, {users, total}, "Users fetched Successfully")
         )
 })
 

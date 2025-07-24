@@ -86,6 +86,10 @@ function CreateTrips(){
                 })
             });
 
+            if (!res.ok) {
+                const text = await res.text(); 
+                throw new Error("Trip generation failed: " + text.slice(0, 100)); 
+            }
             const result = await res.json();
 
             if(res.ok && result?.data?.tripId){
