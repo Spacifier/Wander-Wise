@@ -27,7 +27,6 @@ function Trips(){
             </main>
         );
     }
-
     const handlePangeChange = () => {
         setPage((prev) => prev+1);
     }
