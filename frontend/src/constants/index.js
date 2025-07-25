@@ -1,9 +1,9 @@
 import { formatDate } from "../lib/utils";
 
 export const sidebarItems = [
-  { id: 1, icon: "/icons/home.svg", label: "Dashboard", href: "/admin/dashboard" },
-  { id: 3, icon: "/icons/users.svg", label: "All Users", href: "/admin/all-users" },
-  { id: 4, icon: "/icons/itinerary.svg", label: "AI Trips", href: "/admin/trips" },
+  { id: 1, icon: "/icons/dashboard.png", label: "Dashboard", href: "/admin/dashboard" },
+  { id: 3, icon: "/icons/people.png", label: "All Users", href: "/admin/all-users" },
+  { id: 4, icon: "/icons/location-on-map.png", label: "AI Trips", href: "/admin/trips" },
 ];
 
 export const chartOneData = [

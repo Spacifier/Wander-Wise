@@ -11,10 +11,8 @@ function AdminLayout(){
             <MobileSidebar />
 
             {/* sidebar for desktop and large screens */}
-            <aside className=" w-full max-w-[270px] hidden lg:block">
-                <SidebarComponent width={270} enableGestures={false}>
+            <aside className=" w-[90px] m-3 hidden lg:block shadow-r-xl rounded-xl">
                     <NavItems />
-                </SidebarComponent>
             </aside>
             
             <aside className="children">

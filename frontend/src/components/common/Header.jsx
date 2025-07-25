@@ -60,7 +60,7 @@ function Header(){
                 <nav className="flex size-full items-center justify-between p-4">
                     <div className="flex items-center gap-7">
                         <Link to="/">
-                            <img src="/img/logo.png" alt="Popcorn Picks" className="w-9 rounded-full" />
+                            <img src="/img/logo3.png" alt="Wander Wise" className="w-9 rounded-full invert" />
                         </Link>
                         <SearchInput containerClass="!bg-blue-50 md:flex hidden items-center justify-center gap-1" />
                     </div>

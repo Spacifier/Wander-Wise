@@ -26,7 +26,7 @@ function MobileSidebar() {
       </header>
 
       <SidebarComponent
-        width={270}
+        width={79}
         ref={sidebarRef}
         created={() => sidebarRef.current.hide()}
         closeOnDocumentClick={true}

@@ -39,7 +39,7 @@
   --color-red-100: #ff543d;
 
   --background-image-auth: url("/images/auth-img.png");
-  --background-image-home: url("/img/home-bg.jpeg");
+  --background-image-home: url("/img/home-bg2.png");
   --background-image-hero: url("/images/hero-img.png");
   --background-image-card-1: url("/images/card-img-1.png");
   --background-image-card-2: url("/images/card-img-2.png");
@@ -320,7 +320,7 @@
         }
     }
     .link-logo {
-        @apply flex items-center gap-1.5 py-10 border-b border-light-100;
+        @apply flex items-center gap-1.5 py-10 ;
         h1 {
         @apply text-base md:text-2xl font-bold text-dark-100;
         }
@@ -388,15 +388,6 @@
         @apply flex flex-col gap-3.5 w-full;
         }
     }
-    .nav-items {
-        @apply flex flex-col px-6 h-full;
-        .container {
-        @apply flex flex-col justify-between h-full;
-        nav {
-            @apply flex flex-col gap-3.5 pt-9;
-        }
-        }
-    }
 
     .admin-layout {
         @apply flex flex-col lg:flex-row h-screen w-full;
@@ -446,7 +437,7 @@
     }
 
     .floating-nav {
-      @apply bg-black rounded-lg border;
+      @apply rounded-lg border;
     }
 
     .absolute-center {
