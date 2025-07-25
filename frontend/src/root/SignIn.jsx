@@ -169,7 +169,7 @@ function SignIn() {
                 <div className="absolute top-6 z-10 right-5 flex items-center gap-3 mb-8 text-gray-50">
                     <h1 className="text-3xl font-bold">Wander Wise</h1>
                     <Link to="/">
-                        <img src="/img/logo.png" alt="logo" className="w-10 h-10" />
+                        <img src="/img/logo3.png" alt="logo" className="w-10 h-10 rounded-full invert" />
                     </Link>
                 </div>
             </div>

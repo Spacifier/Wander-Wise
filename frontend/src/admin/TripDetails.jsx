@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import { cn, fetchAllTrips, fetchTripById, getFirstWord, parseTripData } from "../lib/utils";
-import { Header, InfoPill, TripCard } from "../../components";
+import { Header, InfoPill, Loader, TripCard } from "../../components";
 import { ChipDirective, ChipListComponent, ChipsDirective } from "@syncfusion/ej2-react-buttons";
 
 
@@ -28,19 +28,10 @@ function TripDetails(){
         fetchTrip();
     },[tripId])
 
-    if (!trip) {
+    if (!trip || !allTrips) {
         return (
             <main className="wrapper">
-            <Header title="Trip Details" description="Loading trip..." />
-            <p className="text-center">Loading...</p>
-            </main>
-        );
-    }
-    if (!allTrips) {
-        return (
-            <main className="wrapper">
-            <Header title="Trip Details" description="Loading trip..." />
-            <p className="text-center">Loading...</p>
+                <Loader />
             </main>
         );
     }

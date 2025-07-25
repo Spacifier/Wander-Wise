@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Header, TripCard } from "../../components";
+import { Header, Loader, TripCard } from "../../components";
 import { fetchAllTrips, parseTripData } from "../lib/utils";
 import { PagerComponent } from "@syncfusion/ej2-react-grids";
 
@@ -23,8 +23,7 @@ function Trips(){
     if (!allTrips) {
         return (
             <main className="wrapper">
-            <Header title="Trip Details" description="Loading trip..." />
-            <p className="text-center">Loading...</p>
+                <Loader />
             </main>
         );
     }
@@ -35,7 +34,7 @@ function Trips(){
 
     return (
        <main className="all-users wrapper">
-             <Header
+            <Header
                 title = "Trips"
                 description = "View and edit AI generated travel plans"
                 ctaText= "Create a trip"

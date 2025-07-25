@@ -106,6 +106,14 @@
         font-family: "ailerons";
         src: url("/fonts/Ailerons-TrialVersion.otf") format("opentype");
     }
+    @font-face {
+        font-family: "nunito";
+        src: url("/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+    }
+    @font-face {
+        font-family: "satoshi";
+        src: url("/fonts/Satoshi-Regular.otf") format("opentype");
+    }
 }
 
 @layer components {

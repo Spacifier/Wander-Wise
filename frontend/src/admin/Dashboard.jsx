@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Header, StatsCard, TripCard } from "../../components";
+import { Header, Loader, StatsCard, TripCard } from "../../components";
 import { useAuth } from "../root/AuthProvider";
 import { 
     fetchAllTrips, 
@@ -56,8 +56,7 @@ function Dashboard(){
     if (!dashboardStats || !allTrips || !userGrowth || !tripsByTravelStyle || !allUsers) {
         return (
             <main className="wrapper">
-            <Header title="Trip Details" description="Loading trip..." />
-            <p className="text-center">Loading...</p>
+                <Loader />
             </main>
         );
     }

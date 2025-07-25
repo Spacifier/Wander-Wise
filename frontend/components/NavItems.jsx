@@ -15,32 +15,30 @@ function NavItems({handleClick}){
             <div className="flex flex-col justify-between h-full">
                 <nav className='flex flex-col gap-3 pt-9'>
                     {sidebarItems.map(({ id, href, icon, label }) => (
-                   <NavLink to={href} key={id}>
-                    {({ isActive }) => (
-                        <div
-                        className={cn(
-                            'group relative flex items-center justify-center w-full h-12 transition-all duration-300',
-                            isActive ? 'bg-light-200 text-white rounded-r-full py-8' : 'rounded-full hover:bg-gray-900 hover:shadow-xl'
+                    <NavLink to={href} key={id}>
+                        {({ isActive }) => (
+                            <div
+                            className={cn(
+                                'group relative flex items-center justify-center w-full h-12 transition-all duration-300',
+                                isActive ? 'bg-light-200 text-white rounded-r-full py-8' : 'rounded-full hover:bg-gray-900 hover:shadow-xl'
+                            )}
+                            onClick={handleClick}
+                            >
+                                <img
+                                    src={icon}
+                                    alt={label}
+                                    className={cn('size-6 transition-all',
+                                    isActive ? 'brightness-0' : 'brightness-100 invert'
+                                    )}
+                                />
+                                {/* Tooltip Label on Hover */}
+                                <span className="absolute left-22 bg-gray-800 text-white text-sm font-medium px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-50 whitespace-nowrap">
+                                    {label}
+                                </span>
+                            </div>
                         )}
-                        onClick={handleClick}
-                        >
-                            <img
-                                src={icon}
-                                alt={label}
-                                className={cn('size-6 transition-all',
-                                isActive ? 'brightness-0' : 'brightness-100 invert'
-                                )}
-                            />
-                            {/* Tooltip Label on Hover */}
-                            <span className="absolute left-22 bg-gray-800 text-white text-sm font-medium px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-50 whitespace-nowrap">
-                                {label}
-                            </span>
-                        </div>
-                    )}
                     </NavLink>
-
                     ))}
-
                 </nav>
                 <footer className='nav-footer flex flex-center'>
                     {/* <img src={user?.avatar || getRandomAvatar()} alt={user?.username || 'WanderWise User'} />
