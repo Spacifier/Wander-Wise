@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../root/AuthProvider";
+import { useAuth } from "../root/AuthProvider.jsx";
 
 function Home() {
     const { user, logout } = useAuth();

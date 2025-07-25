@@ -35,8 +35,13 @@ function SignIn() {
                 body: JSON.stringify(payload),
         });
 
-        const { data, message } = await res.json();
-        if (!res.ok) throw new Error(message || "Something went wrong");
+        if (res.headers.get("content-type")?.includes("application/json")) {
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.message || "Something went wrong");
+        } else {
+            throw new Error("Unexpected server response");
+        }
+
 
         if (isLogin) navigate("/");
         else {
@@ -45,6 +50,7 @@ function SignIn() {
         }
         } catch (err) {
             setError(err.message);
+            console.error("Auth error:", err); 
         } finally {
             setLoading(false);
         }

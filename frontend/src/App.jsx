@@ -1,6 +1,6 @@
 import {Routes,Route} from 'react-router-dom';
 import Layout from './Layout';
-import Home from './components/HomeElements/Home.jsx';
+import Home from './HomeElements/Home.jsx';
 import Explore from './components/ExploreElements/Explore.jsx';
 import AdminLayout from './AdminLayout.jsx';
 import Dashboard from "./admin/Dashboard.jsx";

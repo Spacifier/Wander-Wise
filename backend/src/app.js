@@ -3,6 +3,7 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { errorHandler } from './middlewares/error.middleware.js';
 
 const app = express()
 
@@ -25,5 +26,8 @@ import dashboardRouter from './routes/dashboard.route.js';
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/trips",tripRouter);
 app.use("/api/v1/dashboard",dashboardRouter);
+
+//error handeling
+app.use(errorHandler);
 
 export {app}
