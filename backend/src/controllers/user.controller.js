@@ -7,7 +7,9 @@ import mongoose from "mongoose";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const options = {
     httpOnly: true,
-    secure: false
+    secure: true, // Important for HTTPS
+    sameSite: "None", // Required for cross-origin cookies
+    maxAge: 7 * 24 * 60 * 60 * 1000,
 }
 const getRandomAvatar = () => {
   const total = 9;
