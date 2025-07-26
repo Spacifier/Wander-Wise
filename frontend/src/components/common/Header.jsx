@@ -54,7 +54,12 @@ function Header(){
 
     //for profile
     const openProfile = () => {
+        if(user.status === "admin"){
+            navigate('/admin')
+        }
+        else{
         navigate('/')
+        }
     }
 
     useEffect(()=> {

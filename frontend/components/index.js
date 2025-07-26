@@ -5,5 +5,7 @@ export {default as StatsCard} from "./StatsCard.jsx";
 export {default as TripCard} from "./TripCard.jsx";
 export {default as InfoPill} from "./InfoPill.jsx";
 export {default as Button} from "./Button.jsx";
+export {default as DeleteButton} from "./DeleteButton.jsx";
+export {default as SubmitButton} from "./SubmitButton.jsx";
 export {default as TravelCard} from "./TravelCard.jsx";
 export {default as Loader} from "./Loader.jsx";

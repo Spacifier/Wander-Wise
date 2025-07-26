@@ -27,7 +27,7 @@ function TravelPage(){
             </main>
         );
     }
-    const handlePangeChange = () => {
+    const handlePageChange = () => {
         setPage((prev) => prev+1);
     }
 
@@ -63,7 +63,7 @@ function TravelPage(){
                     totalRecordsCount={totalTrips}
                     pageSize={8}
                     currentPage={page}
-                    click={handlePangeChange}
+                    click={handlePageChange}
                     cssClass="!mb-4"
                 />
             </section>

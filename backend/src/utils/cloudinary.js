@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config()
 import {v2 as cloudinary} from 'cloudinary';
 import fs from "fs";
 import {ApiError} from "./ApiError.js"
@@ -20,6 +22,7 @@ const uploadOnCloudinary = async(localFilePath) => {
         return response;
 
     } catch (error) {
+        console.error("Cloudinary upload failed:", error);
         fs.unlinkSync(localFilePath)
         return null
     }

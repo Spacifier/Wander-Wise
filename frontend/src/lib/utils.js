@@ -119,8 +119,25 @@ export const fetchTripById = async (tripId) => {
     }
 };
 
-export const fetchItinerary = async () => {
-    
+export const deleteTrip = async (tripId) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/trips/delete/${tripId}`, {
+            method: "DELETE",
+            credentials: "include",
+        });
+
+        const result = await res.json();
+
+        if(!res.ok){
+            return {msg: result.message || "Failed to Delete Trip"};
+        }
+
+        return { msg: result.message || "Trip Deleted Successfully" };
+
+    } catch (error) {
+        console.log(error);
+        return {msg: error.message || "Unexpectred error while deleting trip"};
+    }
 }
 
 export const fetchCountries = async () => {
@@ -225,5 +242,51 @@ export const fetchTripsByTravelStyle = async () => {
     } catch (error) {
         console.error("Failed to fetch trips by travel style:", error);
         return [];
+    }
+};
+
+export const changePassword = async(oldPassword, newPassword) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/change-password`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ oldPassword, newPassword })
+        });
+
+        const result = await res.json();
+        if(!res.ok){
+            return {msg: null, err: result.message || "Failed to change password"}
+        }
+
+        return { msg: result.message, err: null };
+    } catch (error) {
+        console.error(error)
+        return {msg: null, err: error.message || "Failed to change password"}
+    }
+};
+
+export const changeAvatar = async(file) => {
+    try {
+        const formData = new FormData();
+        formData.append("avatar", file);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/users/avatar`,{
+            method: "POST",
+            credentials:"include",
+            body: formData,
+        })
+
+        const result = await res.json();
+        if(!res.ok){
+            return {msg: null, err: result.message}
+        }
+
+        return { msg: result.message, err: null };
+
+    } catch (error) {
+        console.error(error)
+        return {msg: null, err: error.message || "Failed to change avatar"}
     }
 };

@@ -3,7 +3,6 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const options = {
     httpOnly: true,
@@ -181,7 +180,7 @@ const changeCurrentPassword = asyncHandler( async(req,res) => {
 
     return res 
         .status(200)
-        .json(new ApiResponse(200,{},"Password changed Successfully"))
+        .json(new ApiResponse(200,{},"Password Updated"))
 })
 
 const getCurrentUser = asyncHandler( async (req,res) => {
@@ -197,6 +196,7 @@ const updateAvatarImage = asyncHandler(async(req,res) => {
     }
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
+
     if(!avatar.url){
         throw new ApiError(400, "Error while uploading avatar")
     }

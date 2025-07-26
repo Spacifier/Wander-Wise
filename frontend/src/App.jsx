@@ -15,6 +15,7 @@ import Trips from './admin/Trips.jsx';
 import TravelPage from './Travel/TravelPage.jsx';
 import TravelCreate from './Travel/TravelCreate.jsx';
 import TravelItinerary from './Travel/TravleItinerary.jsx';
+import Admin from './admin/AdminPage/Admin.jsx';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path='travel/:travelId' element={<TravelDetails />} />
             </Route>
             <Route path='/admin' element={<AdminRoute> <AdminLayout /> </AdminRoute>}>
+                <Route path='' element={<AdminRoute> <Admin /> </AdminRoute>} />
                 <Route path='dashboard' element={<AdminRoute> <Dashboard /> </AdminRoute>} />
                 <Route path='all-users' element={<AdminRoute> <AllUsers /> </AdminRoute>} />
                 <Route path='trips' element={<AdminRoute> <Trips /> </AdminRoute>} />

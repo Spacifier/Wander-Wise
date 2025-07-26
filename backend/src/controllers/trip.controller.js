@@ -256,9 +256,34 @@ const createItinerary = asyncHandler(async(req,res) => {
     }
 })
 
+const deleteTrip = asyncHandler(async (req,res) => {
+    const {tripId} = req.params;
+    const userStatus = req.user?.status;
+    if(!isValidObjectId(tripId)){
+        throw new ApiError(400, "Invalid trip ID");
+    }
+    if(userStatus !== "admin"){
+        throw new ApiError(403, "Unauthorized to delete this trip");
+    }
+
+    try {
+        await Trip.findByIdAndDelete(tripId);
+    } catch (error) {
+        throw new ApiError(502,"Couldnt delete Trip")   
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200,{}, "Trip Deleted Successfully")
+        )
+
+})
+
 export {
     createTrip,
     getAllTrips,
     getTripById,
-    createItinerary
+    createItinerary,
+    deleteTrip
 }

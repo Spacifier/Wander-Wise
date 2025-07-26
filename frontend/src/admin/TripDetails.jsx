@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import {useParams} from 'react-router-dom';
-import { cn, fetchAllTrips, fetchTripById, getFirstWord, parseTripData } from "../lib/utils";
-import { Header, InfoPill, Loader, TripCard } from "../../components";
+import {useNavigate, useParams} from 'react-router-dom';
+import { cn, deleteTrip, fetchAllTrips, fetchTripById, getFirstWord, parseTripData } from "../lib/utils";
+import { DeleteButton, Header, InfoPill, Loader, TripCard } from "../../components";
 import { ChipDirective, ChipListComponent, ChipsDirective } from "@syncfusion/ej2-react-buttons";
 
 
 function TripDetails(){
     const { tripId } = useParams();
+    const navigate = useNavigate();
     const [trip,setTrip] = useState(null);
     const [allTrips,setAllTrips] = useState(null);
     const [error,setError] = useState(null);
@@ -44,6 +45,17 @@ function TripDetails(){
         );
     }
 
+    const handleDelete = async() => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this trip?");
+        if(!confirmDelete) return;
+
+        const {msg} = await deleteTrip(tripId);
+        alert(msg);
+
+        if(msg === "Trip Deleted Successfully") {
+            navigate("/admin/trips")
+        }
+    };
 
     const imageUrls = trip?.imageUrls || [];
     const tripData = parseTripData(trip.tripDetail);
@@ -182,6 +194,9 @@ function TripDetails(){
                         </div>
                     </section>
                 ))}
+                <div className="flex-center">
+                    <DeleteButton onClick={handleDelete}/>
+                </div>
             </section>
             <section className="flex flex-col gap-6">
                     <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
