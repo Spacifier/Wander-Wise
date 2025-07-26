@@ -119,6 +119,10 @@ export const fetchTripById = async (tripId) => {
     }
 };
 
+export const fetchItinerary = async () => {
+    
+}
+
 export const fetchCountries = async () => {
     try {
         const response = await fetch("https://restcountries.com/v3.1/all?fields=name,latlng,flags,maps");

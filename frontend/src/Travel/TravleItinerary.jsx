@@ -1,52 +1,20 @@
 import { useEffect, useState } from "react";
-import {useParams} from 'react-router-dom';
-import { cn, fetchAllTrips, fetchTripById, getFirstWord, parseTripData } from "../lib/utils";
-import { Header, InfoPill, Loader, TripCard } from "../../components";
+import { cn, getFirstWord, parseTripData } from "../lib/utils";
+import { Header, InfoPill, Loader} from "../../components";
 import { ChipDirective, ChipListComponent, ChipsDirective } from "@syncfusion/ej2-react-buttons";
+import { useLocation } from "react-router-dom";
 
+function TravelItinerary(){
+    const location = useLocation();
+    const { tripData, imageUrls } = location.state || {};
 
-function TravelDetails(){
-    const { travelId } = useParams();
-    const [trip,setTrip] = useState(null);
-    const [allTrips,setAllTrips] = useState(null);
-    const [error,setError] = useState(null);
-
-    useEffect(() => {
-        const fetchTrip = async () => {
-            const [{trip,err}, {trips}] = await Promise.all([
-                fetchTripById(travelId),
-                fetchAllTrips(4, 1)
-            ])  
-            setTrip(trip);
-            setError(err);
-            setAllTrips(trips.map(({_id, tripDetail, imageUrls}) => ({
-                id: _id,
-                ...parseTripData(tripDetail),
-                imageUrls: imageUrls ?? []
-            })));
-        };
-        fetchTrip();
-    },[travelId])
-
-    if (!trip || !allTrips) {
+    if (!tripData) {
         return (
-            <main className="h-screen w-screen flex flex-col flex-center wrapper">
+            <main className="h-screen w-screen flex flex-col flex-center wrapper ">
                 <Loader />
             </main>
         );
     }
-    if (error) {
-        return (
-            <main className="wrapper">
-            <Header title="Trip Details" description="Error loading trip" />
-            <p className="text-center text-red-500">{error}</p>
-            </main>
-        );
-    }
-
-
-    const imageUrls = trip?.imageUrls || [];
-    const tripData = parseTripData(trip.tripDetail);
     const {
         name, duration, itinerary, travelStyle, groupType,
         budget, interests, estimatedPrice, description, bestTimeToVisit, 
@@ -183,24 +151,8 @@ function TravelDetails(){
                     </section>
                 ))}
             </section>
-            <section className="flex flex-col gap-6">
-                    <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
-                    <div className="trip-grid">
-                        {allTrips.map(({id, name, imageUrls, itinerary, interests, travelStyle, estimatedPrice}) => (
-                            <TripCard
-                                id={id}
-                                key={id}
-                                name={name}
-                                location={itinerary?.[0].location ?? ''}
-                                imageUrl={imageUrls[0]}
-                                tags={[interests, travelStyle]}
-                                price={estimatedPrice}
-                            />
-                        ))}
-                    </div>
-                </section>
         </main>
     );
 }
 
-export default TravelDetails
+export default TravelItinerary

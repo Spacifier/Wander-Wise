@@ -12,6 +12,9 @@ import CreateTrips from './admin/CreateTrip.jsx';
 import TripDetails from './admin/TripDetails.jsx';
 import TravelDetails from './Travel/TravelDetails.jsx';
 import Trips from './admin/Trips.jsx';
+import TravelPage from './Travel/TravelPage.jsx';
+import TravelCreate from './Travel/TravelCreate.jsx';
+import TravelItinerary from './Travel/TravleItinerary.jsx';
 
 
 function App() {
@@ -21,8 +24,11 @@ function App() {
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/' element={<Layout />}>
                 <Route path='' element={<Home />} />
-                <Route path='explore' element={<ProtectedRoute> <Explore /> </ProtectedRoute>} />
-                <Route path='travel/:travelId' element={<ProtectedRoute> <TravelDetails /> </ProtectedRoute>} />
+                <Route path='explore' element={<Explore />} />
+                <Route path='travel' element={<ProtectedRoute> <TravelPage /> </ProtectedRoute>} />
+                <Route path='travel/create' element={<ProtectedRoute> <TravelCreate /> </ProtectedRoute>} />
+                <Route path='travel/itinerary' element={<ProtectedRoute> <TravelItinerary /> </ProtectedRoute>} />
+                <Route path='travel/:travelId' element={<TravelDetails />} />
             </Route>
             <Route path='/admin' element={<AdminRoute> <AdminLayout /> </AdminRoute>}>
                 <Route path='dashboard' element={<AdminRoute> <Dashboard /> </AdminRoute>} />

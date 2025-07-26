@@ -3,7 +3,7 @@ import { Header, Loader, TripCard } from "../../components";
 import { fetchAllTrips, parseTripData } from "../lib/utils";
 import { PagerComponent } from "@syncfusion/ej2-react-grids";
 
-function Trips(){
+function TravelPage(){
     const [allTrips,setAllTrips] = useState();
     const [totalTrips,setTotalTrips] = useState();
     const [page,setPage] = useState(1);
@@ -71,4 +71,4 @@ function Trips(){
     );
 }
 
-export default Trips
+export default TravelPage

@@ -21,7 +21,7 @@ function Travel(){
 
     if (!allTrips) {
         return (
-            <main className="wrapper">
+            <main className="h-screen w-screen flex flex-col flex-center wrapper ">
                 <Loader />
             </main>
         );
