@@ -445,7 +445,7 @@
     }
 
     .floating-nav {
-      @apply rounded-lg border;
+      @apply rounded-lg border bg-[#1a1a1a90];
     }
 
     .absolute-center {

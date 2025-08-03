@@ -58,8 +58,12 @@ function Header(){
             navigate('/admin')
         }
         else{
-        navigate('/')
+        navigate('/profile')
         }
+    }
+
+    const handelSignin = () => {
+        navigate('/sign-in')
     }
 
     useEffect(()=> {
@@ -91,12 +95,21 @@ function Header(){
                                     {item}
                                 </NavLink>
                             ))}
-                            <button 
+                            {user ? (
+                                <button 
                                 onClick={logout}
                                 className="nav-hover-btn"
-                            >
-                                Logout
-                            </button>
+                                >
+                                    Logout
+                                </button>
+                            ) : (
+                                <button 
+                                onClick={handelSignin}
+                                className="nav-hover-btn"
+                                >
+                                    Login
+                                </button>
+                            )}
                         </div>
                         <button title='bg-music' className="ml-10 flex items-center space-x-0.5 cursor-pointer" onClick={toggleAudioIndicator}>
                             <audio src="/audio/loop.mp3" ref={audioElementRef} className="hidden" loop />

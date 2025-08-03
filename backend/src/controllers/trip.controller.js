@@ -46,7 +46,7 @@ const createTrip = asyncHandler(async(req,res) => {
             {
                 "name": "A descriptive title for the trip",
                 "description": "A brief description of the trip and its highlights not exceeding 100 words",
-                "estimatedPrice": "Lowest average price for the trip in USD, e.g.$price",
+                "estimatedPrice": "Lowest average price for the trip in INR, e.g.₹price",
                 "duration": ${numberOfDays},
                 "budget": "${budget}",
                 "travelStyle": "${JSON.stringify(travelStyle)}",

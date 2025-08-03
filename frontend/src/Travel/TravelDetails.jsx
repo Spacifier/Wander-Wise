@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import { cn, fetchAllTrips, fetchTripById, getFirstWord, parseTripData } from "../lib/utils";
 import { Header, InfoPill, Loader, TripCard } from "../../components";
 import { ChipDirective, ChipListComponent, ChipsDirective } from "@syncfusion/ej2-react-buttons";
@@ -10,6 +10,7 @@ function TravelDetails(){
     const [trip,setTrip] = useState(null);
     const [allTrips,setAllTrips] = useState(null);
     const [error,setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTrip = async () => {
@@ -182,6 +183,12 @@ function TravelDetails(){
                         </div>
                     </section>
                 ))}
+                <button 
+                    onClick={() => navigate(`/travel/${travelId}/payment`)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded mt-4"
+                >
+                    Book Now
+                </button>
             </section>
             <section className="flex flex-col gap-6">
                     <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>

@@ -290,3 +290,27 @@ export const changeAvatar = async(file) => {
         return {msg: null, err: error.message || "Failed to change avatar"}
     }
 };
+
+export const createRazorpayOrder = async (amount, tripId) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/api/v1/trips/create-payment`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ amount, tripId })
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+        return { order: null, err: result.message || "Failed to create order" };
+        }
+
+        return { order: result.data, err: null };
+    } catch (error) {
+        console.error("Create Razorpay Order Error:", error);
+        return { order: null, err: error.message || "Unexpected error" };
+    }
+};

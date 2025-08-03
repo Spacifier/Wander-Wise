@@ -16,13 +16,12 @@ const StyledWrapper = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #262626;
+    background-color: #00001a;
     border: none;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
     cursor: pointer;
     transition-duration: .3s;
     overflow: hidden;
@@ -42,7 +41,7 @@ const StyledWrapper = styled.div`
     width: 140px;
     border-radius: 50px;
     transition-duration: .3s;
-    background-color: rgb(255, 69, 69);
+    background-color: #ff5757;
     align-items: center;
 }
 

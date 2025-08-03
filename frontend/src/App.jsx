@@ -16,6 +16,8 @@ import TravelPage from './Travel/TravelPage.jsx';
 import TravelCreate from './Travel/TravelCreate.jsx';
 import TravelItinerary from './Travel/TravleItinerary.jsx';
 import Admin from './admin/AdminPage/Admin.jsx';
+import Profile from './HomeElements/Profile/Profile.jsx';
+import TravelPayment from './Travel/TravelPayment.jsx';
 
 
 function App() {
@@ -26,10 +28,12 @@ function App() {
             <Route path='/' element={<Layout />}>
                 <Route path='' element={<Home />} />
                 <Route path='explore' element={<Explore />} />
+                <Route path='profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
                 <Route path='travel' element={<ProtectedRoute> <TravelPage /> </ProtectedRoute>} />
                 <Route path='travel/create' element={<ProtectedRoute> <TravelCreate /> </ProtectedRoute>} />
                 <Route path='travel/itinerary' element={<ProtectedRoute> <TravelItinerary /> </ProtectedRoute>} />
                 <Route path='travel/:travelId' element={<TravelDetails />} />
+                <Route path='travel/:travelId/payment' element={<ProtectedRoute> <TravelPayment /> </ProtectedRoute>} />
             </Route>
             <Route path='/admin' element={<AdminRoute> <AdminLayout /> </AdminRoute>}>
                 <Route path='' element={<AdminRoute> <Admin /> </AdminRoute>} />

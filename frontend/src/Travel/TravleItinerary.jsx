@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { cn, getFirstWord, parseTripData } from "../lib/utils";
+import { cn, getFirstWord } from "../lib/utils";
 import { Header, InfoPill, Loader} from "../../components";
 import { ChipDirective, ChipListComponent, ChipsDirective } from "@syncfusion/ej2-react-buttons";
 import { useLocation } from "react-router-dom";
